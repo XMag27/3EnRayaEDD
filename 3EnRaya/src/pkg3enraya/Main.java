@@ -5,7 +5,7 @@
  */
 package pkg3enraya;
 
-import GUI.Tablero;
+import GUI.TableroGUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +22,7 @@ public class Main extends Application {
     public void jugar(){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new Tablero().getRoot(), 600,600);
+        Scene sc = new Scene(new TableroGUI().getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }

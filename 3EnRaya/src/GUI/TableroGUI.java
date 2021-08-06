@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
  *
  * @author Xavier
  */
-public class Tablero {
+public class TableroGUI {
     Pane root = crear();
     private Pane crear(){
         Pane raiz = new Pane();

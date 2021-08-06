@@ -27,7 +27,7 @@ public class Rayas extends StackPane{
         setAlignment(Pos.CENTER);
         boolean addAll = getChildren().addAll(borde, jugador);
         setOnMouseClicked(e -> {
-            dibujarX();
+            dibujar0();
         });
     }
     

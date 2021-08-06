@@ -5,6 +5,7 @@
  */
 package pkg3enraya;
 
+import GUI.Tablero;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,25 +19,26 @@ import javafx.stage.Stage;
  * @author Xavier
  */
 public class Main extends Application {
-    
+    public void jugar(){
+        Stage s = new Stage();
+        s.setTitle("PARTIDA");
+        Scene sc = new Scene(new Tablero().getRoot(), 600,600);
+        s.setScene(sc);
+        s.show();
+    }
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
+        btn.setText("JUGAR");
+        btn.setOnAction(i -> {
+            jugar();
         });
-        
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("3 en Raya");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -45,7 +47,7 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
     
 }

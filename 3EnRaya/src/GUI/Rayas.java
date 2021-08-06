@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+
 /**
  *
  * @author Xavier
@@ -30,17 +31,12 @@ public class Rayas extends StackPane{
         
         setAlignment(Pos.CENTER);
         boolean addAll = getChildren().addAll(borde, jugador);
-        setOnMouseClicked(e -> {
-            dibujarO();
-        });
     }
     
-    private void dibujarX(){
-        jugador.setText("X");
+    public void dibujar(String turno){
+        jugador.setText(turno);
+        this.setDisable(true);
         
-    }
-    private void dibujarO(){
-        jugador.setText("O");
     }
 
     public Text getJugador() {

@@ -8,12 +8,13 @@ package GUI;
 import javafx.scene.layout.Pane;
 import model.Tablero;
 
+
 /**
  *
  * @author Xavier
  */
 public class TableroGUI {
-    public Tablero tablero = new Tablero("x");
+    public Tablero tablero = new Tablero("O");
     Pane root = crear();
     private Pane crear(){
         Pane raiz = new Pane();
@@ -27,6 +28,16 @@ public class TableroGUI {
                 String x = Integer.toString(j);
                 String y = Integer.toString(i);
                 raya.getJugador().setText(this.tablero.getCasillas()[i][j]);
+                raya.setOnMouseClicked(e -> {
+                    raya.dibujar(tablero.getTurno());
+                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());;
+                    tablero.updateWinner();
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+                        }  
+                    }
+                });
             }
         }
         return raiz;

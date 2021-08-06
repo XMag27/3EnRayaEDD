@@ -23,8 +23,9 @@ public class Tablero {
         
         String[][] copia = casillas;
         copia[posX][posY] = turno;
-        
-        return new Tablero(getOtherPlayer(turno));
+        Tablero copiaTablero = new Tablero(getOtherPlayer(turno));
+        copiaTablero.setCasillas(casillas);
+        return copiaTablero;
         
     }
     
@@ -119,6 +120,18 @@ public class Tablero {
     public String[][] getCasillas() {
         return casillas;
     }
-           
+
+    public void setCasillas(String[][] casillas) {
+        this.casillas = casillas;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+    
             
 }

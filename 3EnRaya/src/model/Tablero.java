@@ -115,6 +115,10 @@ public class Tablero {
         return full;
         
     }
+
+    public String[][] getCasillas() {
+        return casillas;
+    }
            
             
 }

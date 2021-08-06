@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
  * @author Xavier
  */
 public class Main extends Application {
+    public TextField jugador= new TextField();
     public void jugar(){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
@@ -28,6 +30,7 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) {
+        
         Button btn = new Button();
         btn.setText("JUGAR");
         btn.setOnAction(i -> {

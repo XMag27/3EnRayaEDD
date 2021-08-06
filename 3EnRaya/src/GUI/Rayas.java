@@ -17,8 +17,12 @@ import javafx.scene.text.Text;
  * @author Xavier
  */
 public class Rayas extends StackPane{
+    private int posx;
+    private int posy;
     private Text jugador = new Text();
-    public Rayas(){
+    public Rayas(int posx,int posy){
+        this.posx = posx;
+        this.posy = posy;
         Rectangle borde = new Rectangle(200, 200);
         borde.setFill(null);
         borde.setStroke(Color.BLACK);
@@ -27,14 +31,36 @@ public class Rayas extends StackPane{
         setAlignment(Pos.CENTER);
         boolean addAll = getChildren().addAll(borde, jugador);
         setOnMouseClicked(e -> {
-            dibujar0();
+            dibujarO();
         });
     }
     
     private void dibujarX(){
         jugador.setText("X");
+        
     }
-    private void dibujar0(){
-        jugador.setText("0");
+    private void dibujarO(){
+        jugador.setText("O");
     }
+
+    public Text getJugador() {
+        return jugador;
+    }
+
+    public int getPosx() {
+        return posx;
+    }
+
+    public void setPosx(int posx) {
+        this.posx = posx;
+    }
+
+    public int getPosy() {
+        return posy;
+    }
+
+    public void setPosy(int posy) {
+        this.posy = posy;
+    }
+    
 }

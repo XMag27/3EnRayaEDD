@@ -34,15 +34,15 @@ public class Tablero {
         
         // filas        
         for(int i=0; i<3; i++){
-            boolean fileHaveWinner = casillas[i][0].equals(casillas[i][1]) && casillas.equals(casillas[i][2]) && !casillas[i][0].equals("");
+            boolean fileHaveWinner = casillas[i][0].equals(casillas[i][1]) && casillas[i][0].equals(casillas[i][2]) && !casillas[i][0].equals("");
             if(fileHaveWinner)                
                 winner = casillas[i][0];
         }
         // columnas        
-        for(int i=0; i<3; i++){
-            boolean columnHaveWinner = casillas[0][i].equals(casillas[1][i]) && casillas.equals(casillas[2][i]) && !casillas[0][i].equals("");
+        for(int j=0; j<3; j++){
+            boolean columnHaveWinner = casillas[0][j].equals(casillas[1][j]) && casillas[0][j].equals(casillas[2][j]) && !casillas[0][j].equals("");
             if(columnHaveWinner)
-                winner = casillas[0][i];
+                winner = casillas[0][j];
         }
         // diagonales
         boolean diagonal1HaveWinner = casillas[0][0].equals(casillas[1][1]) && casillas[1][1].equals(casillas[2][2]) && !casillas[0][0].equals("");
@@ -71,7 +71,7 @@ public class Tablero {
         }
         //columnas
         for(int i=0; i<3; i++){ 
-            boolean esColumnaDisponible = !casillas[i][0].equals(otherPlayer) && !casillas[i][1].equals(otherPlayer) && !casillas[i][2].equals(otherPlayer);
+            boolean esColumnaDisponible = !casillas[0][i].equals(otherPlayer) && !casillas[1][i].equals(otherPlayer) && !casillas[2][i].equals(otherPlayer);
             if(esColumnaDisponible)
                 posiblesJugadas++;            
         }
@@ -107,12 +107,20 @@ public class Tablero {
     }
     
     public boolean isFull(){
-        
-        boolean full = true;
-        for(int i=0; i<3; i++)
-            for (int j=0; j<3; j++)
-                full = !casillas[i][j].equals("");
-        
+        int contador = 0;
+        boolean full = false;
+        for(int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                if(!casillas[i][j].equals("")){
+                    contador++;
+                }
+                
+            }
+        }
+        if(contador == 9){
+            full = true;
+        }
+                
         return full;
         
     }
@@ -131,6 +139,10 @@ public class Tablero {
 
     public String getTurno() {
         return turno;
+    }
+
+    public String getWinner() {
+        return winner;
     }
     
             

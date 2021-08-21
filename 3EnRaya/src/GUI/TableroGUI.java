@@ -7,6 +7,7 @@ package GUI;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.MinimaxClass;
 import model.Tablero;
@@ -35,59 +36,62 @@ public class TableroGUI {
         tablero = new Tablero(t);
         Pane raiz = new Pane();
         raiz.setPrefSize(600, 600);
-        for(int i =0; i<3; i++){
-            for(int j = 0; j < 3; j++){
-                Rayas raya = new Rayas(i,j);
-                raya.setTranslateX(j*200);
-                raya.setTranslateY(i*200);
-                raiz.getChildren().add(raya);
-                String x = Integer.toString(j);
-                String y = Integer.toString(i);
-                raya.getJugador().setText(this.tablero.getCasillas()[i][j]);
-                raya.setOnMouseClicked(e -> {
-                    raya.dibujar(tablero.getTurno());
-                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());;
-                    tablero.updateWinner();
-                    
-                    
-
-                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
-                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
-                    }if(tablero.getWinner() == "empate"){
-                        mostrarAlerta("EMPATARON");
-                    }
-
-                    for(int a = 0; a < 3; a++){
-                        for(int b = 0; b < 3; b++){
-                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
-                        }  
-                    }
-                    
-                    MinimaxClass minMax = new MinimaxClass(tablero);
-                    tablero = minMax.minimax();
-                    tablero.updateWinner();
-                    
-                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
-                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
-                    }if(tablero.getWinner() == "empate"){
-                        mostrarAlerta("EMPATARON");
-                    }
-                    
-                    for(int a = 0; a < 3; a++){
-                        for(int b = 0; b < 3; b++){
-                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
-                        }  
-                    }
-                    
-                    
-                    System.out.println("------------------------------");
-                });
-            }
-        }
+        actualizarTablero(raiz);
         return raiz;
     }
     public Pane getRoot() {
         return root;
     }
+    
+    public void actualizarTablero(Pane p){
+        for(int i =0; i<3; i++){
+            for(int j = 0; j < 3; j++){
+                Rayas raya = new Rayas(i,j);
+                raya.setTranslateX(j*200);
+                raya.setTranslateY(i*200);
+                p.getChildren().add(raya);                
+                raya.getJugador().setText(tablero.getCasillas()[i][j]);
+                raya.setOnMouseClicked(e -> {                    
+                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());
+                    actualizarTablero(p);
+                    System.out.println("aaa");
+                    tablero.updateWinner();
+                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
+                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                    }if(tablero.getWinner() == "empate"){
+                        mostrarAlerta("EMPATARON");
+                    }                                        
+//                  Hasta Aquí
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+                        }  
+                    }
+                    
+                    MinimaxClass minmax = new MinimaxClass(tablero);
+                    tablero = minmax.minimax();
+                    actualizarTablero(p);
+                    tablero.updateWinner();
+                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
+                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                    }if(tablero.getWinner() == "empate"){
+                        mostrarAlerta("EMPATARON");
+                    }                                        
+//                  Hasta Aquí
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+                        }  
+                    }
+                    
+                    
+                    
+                });
+            }
+        }
+        
+        
+    }
+    
     
     }

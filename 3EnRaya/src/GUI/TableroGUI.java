@@ -7,6 +7,7 @@ package GUI;
 
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
+import model.MinimaxClass;
 import model.Tablero;
 
 
@@ -37,16 +38,27 @@ public class TableroGUI {
                 raya.getJugador().setText(this.tablero.getCasillas()[i][j]);
                 raya.setOnMouseClicked(e -> {
                     raya.dibujar(tablero.getTurno());
-                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());;
-                    tablero.updateWinner();
+                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());
+                    tablero.updateWinner();                                        
+                    
                     if(tablero.getWinner() != null){
                         mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
                     }
-                    for(int a = 0; a < 3; a++){
-                        for(int b = 0; b < 3; b++){
-                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
-                        }  
+                    
+                    MinimaxClass nextMove = new MinimaxClass(tablero);
+                    tablero = nextMove.minimax();
+                    tablero.updateWinner();                                        
+                    
+                    if(tablero.getWinner() != null){
+                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
                     }
+                    
+                    
+//                    for(int a = 0; a < 3; a++){
+//                        for(int b = 0; b < 3; b++){
+//                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+//                        }  
+//                    }
                 });
             }
         }

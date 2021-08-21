@@ -20,11 +20,11 @@ public class Tablero {
     }
     
     public Tablero getMove(int posX, int posY){
-        
-        String[][] copia = casillas;
-        copia[posX][posY] = turno;
+                        
         Tablero copiaTablero = new Tablero(getOtherPlayer(turno));
-        copiaTablero.setCasillas(casillas);
+        copiaTablero.clonarCasillas(this);
+        copiaTablero.getCasillas()[posX][posY] = turno;                
+        
         return copiaTablero;
         
     }
@@ -122,6 +122,14 @@ public class Tablero {
         }
                 
         return full;
+        
+    }
+    
+    public void clonarCasillas(Tablero otro){
+        
+        for(int i=0; i<3; i++)
+            for(int j=0; j<3; j++)
+                getCasillas()[i][j] = otro.getCasillas()[i][j];
         
     }
 

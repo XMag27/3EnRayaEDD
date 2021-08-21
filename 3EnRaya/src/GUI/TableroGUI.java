@@ -49,39 +49,42 @@ public class TableroGUI {
                 Rayas raya = new Rayas(i,j);
                 raya.setTranslateX(j*200);
                 raya.setTranslateY(i*200);
-                p.getChildren().add(raya);                
-                raya.getJugador().setText(tablero.getCasillas()[i][j]);
-                raya.setOnMouseClicked(e -> {                    
-                    tablero = tablero.getMove(raya.getPosx(), raya.getPosy());
-                    actualizarTablero(p);
-                    System.out.println("aaa");
-                    tablero.updateWinner();
-                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
-                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
-                    }if(tablero.getWinner() == "empate"){
-                        mostrarAlerta("EMPATARON");
-                    }                                        
-//                  Hasta Aquí
-                    for(int a = 0; a < 3; a++){
-                        for(int b = 0; b < 3; b++){
-                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
-                        }  
-                    }
-                    
-                    MinimaxClass minmax = new MinimaxClass(tablero);
-                    tablero = minmax.minimax();
-                    actualizarTablero(p);
-                    tablero.updateWinner();
-                    if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
-                        mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
-                    }if(tablero.getWinner() == "empate"){
-                        mostrarAlerta("EMPATARON");
-                    }                                        
-//                  Hasta Aquí
-                    for(int a = 0; a < 3; a++){
-                        for(int b = 0; b < 3; b++){
-                            System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
-                        }  
+                p.getChildren().add(raya);
+                if(raya.getJugador().getText()!= null)
+                    raya.getJugador().setText(tablero.getCasillas()[i][j]);
+                raya.setOnMouseClicked(e -> {
+                    if(raya.getJugador().getText().equals("")){
+                        raya.setDisable(true);
+                        tablero = tablero.getMove(raya.getPosx(), raya.getPosy());
+                        actualizarTablero(p);
+                        tablero.updateWinner();
+                        if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
+                            mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                        }if(tablero.getWinner() == "empate"){
+                            mostrarAlerta("EMPATARON");
+                        }                                        
+    //                  Hasta Aquí
+                        for(int a = 0; a < 3; a++){
+                            for(int b = 0; b < 3; b++){
+                                System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+                            }  
+                        }
+
+                        MinimaxClass minmax = new MinimaxClass(tablero);
+                        tablero = minmax.minimax();
+                        actualizarTablero(p);
+                        tablero.updateWinner();
+                        if(tablero.getWinner() != null && tablero.getWinner() != "empate" && tablero.getWinner() != tablero.getTurno()){
+                            mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                        }if(tablero.getWinner() == "empate"){
+                            mostrarAlerta("EMPATARON");
+                        }                                        
+    //                  Hasta Aquí
+                        for(int a = 0; a < 3; a++){
+                            for(int b = 0; b < 3; b++){
+                                System.out.println(tablero.getCasillas()[a][b] + " " + a + b);
+                            }  
+                        }
                     }
                     
                     

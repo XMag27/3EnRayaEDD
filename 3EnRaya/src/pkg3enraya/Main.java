@@ -5,7 +5,7 @@
  */
 package pkg3enraya;
 
-import GUI.TableroGUI;
+import GUI.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,6 +40,13 @@ public class Main extends Application {
         s.setScene(sc);
         s.show();
     }
+    public void jugar2(String turno){
+        Stage s = new Stage();
+        s.setTitle("PARTIDA");
+        Scene sc = new Scene(new TableroGUI2J(turno).getRoot(), 600,600);
+        s.setScene(sc);
+        s.show();
+    }
     @Override
     public void start(Stage primaryStage) {
         Button btn2 = new Button();
@@ -51,10 +58,19 @@ public class Main extends Application {
             if(signo.getValue()==null){
                 mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
             }else{
+                jugar2((String)signo.getValue());
+            }
+            
+        });
+        btn2.setOnAction(i -> {
+            if(signo.getValue()==null){
+                mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
+            }else{
                 jugar((String)signo.getValue());
             }
             
         });
+        
         btn2.setText("JUGAR VS IA");
         VBox root = new VBox();
         root.getChildren().addAll(btn, btn2,signo);

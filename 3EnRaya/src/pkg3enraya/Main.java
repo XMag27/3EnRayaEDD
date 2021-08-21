@@ -10,9 +10,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -21,23 +25,39 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     public TextField jugador= new TextField();
-    public void jugar(){
+    protected void mostrarAlerta(String mensaje){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(mensaje);
+        alert.show();
+    }
+
+    
+    public void jugar(String turno){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new TableroGUI().getRoot(), 600,600);
+        Scene sc = new Scene(new TableroGUI(turno).getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }
     @Override
     public void start(Stage primaryStage) {
-        
+        Button btn2 = new Button();
         Button btn = new Button();
-        btn.setText("JUGAR");
+        ComboBox signo = new ComboBox();
+        signo.getItems().addAll("X","O");
+        btn.setText("JUGAR VS P2");
         btn.setOnAction(i -> {
-            jugar();
+            if(signo.getValue()==null){
+                mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
+            }else{
+                jugar((String)signo.getValue());
+            }
+            
         });
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        btn2.setText("JUGAR VS IA");
+        VBox root = new VBox();
+        root.getChildren().addAll(btn, btn2,signo);
         
         Scene scene = new Scene(root, 300, 250);
         

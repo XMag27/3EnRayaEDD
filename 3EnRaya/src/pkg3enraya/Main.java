@@ -25,6 +25,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     public TextField jugador= new TextField();
+    public String empieza;
     protected void mostrarAlerta(String mensaje){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
@@ -33,32 +34,37 @@ public class Main extends Application {
     }
 
     
-    public void jugar(String turno){
+    public void jugar(String turno, String empieza){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new TableroGUI(turno).getRoot(), 600,600);
+        Scene sc = new Scene(new TableroGUI(turno, empieza).getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }
-    public void jugar2(String turno){
+    public void jugar2(String turno, String empieza){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new TableroGUI2J(turno).getRoot(), 600,600);
+        Scene sc = new Scene(new TableroGUI2J(turno, empieza).getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }
     @Override
     public void start(Stage primaryStage) {
+        
         Button btn2 = new Button();
         Button btn = new Button();
+        
         ComboBox signo = new ComboBox();
+        ComboBox quienEmpieza = new ComboBox();
+        quienEmpieza.getItems().addAll("X","O");       
         signo.getItems().addAll("X","O");
         btn.setText("JUGAR VS P2");
         btn.setOnAction(i -> {
             if(signo.getValue()==null){
                 mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
-            }else{
-                jugar2((String)signo.getValue());
+            }else{                
+                empieza = (String) quienEmpieza.getValue();
+                jugar2((String)signo.getValue(), empieza);
             }
             
         });
@@ -66,14 +72,16 @@ public class Main extends Application {
             if(signo.getValue()==null){
                 mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
             }else{
-                jugar((String)signo.getValue());
+                empieza = (String) quienEmpieza.getValue();
+                jugar((String)signo.getValue(), empieza);
+                
             }
             
         });
         
         btn2.setText("JUGAR VS IA");
         VBox root = new VBox();
-        root.getChildren().addAll(btn, btn2,signo);
+        root.getChildren().addAll(btn, btn2,signo, quienEmpieza);
         
         Scene scene = new Scene(root, 300, 250);
         

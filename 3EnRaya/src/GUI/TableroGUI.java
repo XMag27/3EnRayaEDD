@@ -5,10 +5,12 @@
  */
 package GUI;
 
+import java.util.Random;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.MinimaxClass;
 import model.Tablero;
 
@@ -22,8 +24,8 @@ public class TableroGUI {
     public Tablero tablero;
     Pane root;
 
-    public TableroGUI(String t) {
-        this.root = crear(t);
+    public TableroGUI(String t, String e) {
+        this.root = crear(t, e);
     }
     
     protected void mostrarAlerta(String mensaje){
@@ -32,11 +34,17 @@ public class TableroGUI {
         alert.setHeaderText(mensaje);
         alert.show();
     }
-    private Pane crear(String t){
+    private Pane crear(String t, String e){
         tablero = new Tablero(t);
         Pane raiz = new Pane();
         raiz.setPrefSize(600, 600);
         actualizarTablero(raiz);
+        if(!e.equals(t)){
+            int posX = new Random().nextInt(3);
+            int posY = new Random().nextInt(3);
+            tablero.getCasillas()[posX][posY] = tablero.getOtherPlayer(tablero.getTurno());
+            actualizarTablero(raiz);                        
+        }
         return raiz;
     }
     public Pane getRoot() {
@@ -60,8 +68,12 @@ public class TableroGUI {
                         tablero.updateWinner();
                         if(tablero.getWinner() != null && tablero.getWinner() != "empate"){
                             mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                            Stage stage = (Stage) this.root.getScene().getWindow();
+                            stage.close();
                         }if(tablero.getWinner() == "empate"){
                             mostrarAlerta("EMPATARON");
+                            Stage stage = (Stage) this.root.getScene().getWindow();
+                            stage.close();
                         }                                        
     //                  Hasta Aquí
                         for(int a = 0; a < 3; a++){
@@ -76,8 +88,12 @@ public class TableroGUI {
                         tablero.updateWinner();
                         if(tablero.getWinner() != null && tablero.getWinner() != "empate" && tablero.getWinner() != tablero.getTurno()){
                             mostrarAlerta(tablero.getWinner() +" "+ "ha Ganado");
+                            Stage stage = (Stage) this.root.getScene().getWindow();
+                            stage.close();
                         }if(tablero.getWinner() == "empate"){
                             mostrarAlerta("EMPATARON");
+                            Stage stage = (Stage) this.root.getScene().getWindow();
+                            stage.close();
                         }                                        
     //                  Hasta Aquí
                         for(int a = 0; a < 3; a++){

@@ -9,10 +9,12 @@ import GUI.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -67,6 +69,7 @@ public class Main extends Application {
                 jugar2((String)signo.getValue(), empieza);
             }
             
+            
         });
         btn2.setOnAction(i -> {
             if(signo.getValue()==null){
@@ -81,7 +84,28 @@ public class Main extends Application {
         
         btn2.setText("JUGAR VS IA");
         VBox root = new VBox();
-        root.getChildren().addAll(btn, btn2,signo, quienEmpieza);
+        btn.setStyle("-fx-text-fill: white;\n" +
+"    -fx-font-family: \"Arial Narrow\";\n" +
+"    -fx-font-weight: bold;\n" +
+"    /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/\n" +
+"    -fx-background-color: #00008B;\n" +
+"    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+        btn2.setStyle("-fx-text-fill: white;\n" +
+"    -fx-font-family: \"Arial Narrow\";\n" +
+"    -fx-font-weight: bold;" +
+"    /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/\n" +
+"    -fx-background-color: #00008B;" +
+"    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+        root.setStyle("-fx-background-color: #d7f0f7;");
+        root.setSpacing(5);
+        root.setAlignment(Pos.CENTER);
+        Label j = new Label("Elija el signo para el jugador 1");
+        Label e = new Label("Elija el signo que empieza");
+        j.setStyle("-fx-font-weight: bold;" +
+"    -fx-font-family: \"Arial Narrow\";");
+        e.setStyle("-fx-font-weight: bold;" +
+"    -fx-font-family: \"Arial Narrow\";");
+        root.getChildren().addAll(btn, btn2,j,signo,e, quienEmpieza);
         
         Scene scene = new Scene(root, 300, 250);
         

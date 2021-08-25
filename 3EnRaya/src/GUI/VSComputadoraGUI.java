@@ -22,7 +22,7 @@ public class VSComputadoraGUI {
     Pane root;
 
     public VSComputadoraGUI(String jugador, String quienEmpieza) {
-        this.root = crear(jugador, quienEmpieza);
+            this.root = crear(jugador, quienEmpieza);
     }
 
     protected void mostrarAlerta(String mensaje) {
@@ -33,7 +33,17 @@ public class VSComputadoraGUI {
     }
 
     private Pane crear(String jugador, String quienEmpieza) {
-        tablero = new Tablero(jugador);
+        if(jugador.equals(quienEmpieza)){
+            tablero = new Tablero(jugador);
+        }else{
+            if(jugador.equals("X")){
+                tablero = new Tablero("O");
+            }
+            if(jugador.equals("O")){
+                tablero = new Tablero("X");
+            }
+        }
+        
         miniMaxMove = new MinimaxClass(tablero);
         Pane raiz = new Pane();
         raiz.setStyle("-fx-background-color: #d7f0f7;");

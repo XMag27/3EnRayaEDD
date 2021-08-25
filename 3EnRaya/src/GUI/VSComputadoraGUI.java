@@ -33,16 +33,8 @@ public class VSComputadoraGUI {
     }
 
     private Pane crear(String jugador, String quienEmpieza) {
-        if(jugador.equals(quienEmpieza)){
             tablero = new Tablero(jugador);
-        }else{
-            if(jugador.equals("X")){
-                tablero = new Tablero("O");
-            }
-            if(jugador.equals("O")){
-                tablero = new Tablero("X");
-            }
-        }
+        
         
         miniMaxMove = new MinimaxClass(tablero);
         Pane raiz = new Pane();
@@ -50,6 +42,7 @@ public class VSComputadoraGUI {
         raiz.setPrefSize(600, 600);
         actualizarTablero(raiz);
         if (!quienEmpieza.equals(jugador)) {
+            tablero.setTurno(quienEmpieza);
             tablero = miniMaxMove.minimax();
             actualizarTablero(raiz);
         }

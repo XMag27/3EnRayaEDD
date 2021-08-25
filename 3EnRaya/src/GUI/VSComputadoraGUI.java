@@ -36,6 +36,7 @@ public class VSComputadoraGUI {
         tablero = new Tablero(jugador);
         miniMaxMove = new MinimaxClass(tablero);
         Pane raiz = new Pane();
+        raiz.setStyle("-fx-background-color: #d7f0f7;");
         raiz.setPrefSize(600, 600);
         actualizarTablero(raiz);
         if (!quienEmpieza.equals(jugador)) {
@@ -44,6 +45,7 @@ public class VSComputadoraGUI {
         }
         return raiz;
     }
+    
 
     public Pane getRoot() {
         return root;

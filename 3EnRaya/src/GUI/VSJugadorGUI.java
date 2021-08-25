@@ -33,6 +33,7 @@ public class VSJugadorGUI {
     private Pane crear(String jugador, String quienEmpieza) {
         tablero = new Tablero(jugador);
         Pane raiz = new Pane();
+        raiz.setStyle("-fx-background-color: #d7f0f7;");
         raiz.setPrefSize(600, 600);
         actualizarTablero(raiz);
         if (!jugador.equals(quienEmpieza)) {

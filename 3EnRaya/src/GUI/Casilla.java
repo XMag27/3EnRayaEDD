@@ -17,30 +17,24 @@ import javafx.scene.text.Text;
  *
  * @author Xavier
  */
-public class Rayas extends StackPane{
+public class Casilla extends StackPane{
     private int posx;
     private int posy;
-    private Text jugador = new Text();
-    public Rayas(int posx,int posy){
+    private Text contenido = new Text();
+    
+    public Casilla(int posx,int posy){
         this.posx = posx;
         this.posy = posy;
         Rectangle borde = new Rectangle(200, 200);
         borde.setFill(null);
         borde.setStroke(Color.BLACK);
-        jugador.setFont(Font.font(72));
-        
+        contenido.setFont(Font.font(72));        
         setAlignment(Pos.CENTER);
-        boolean addAll = getChildren().addAll(borde, jugador);
-    }
-    
-    public void dibujar(String turno){
-        jugador.setText(turno);
-        this.setDisable(true);
-        
+        boolean addAll = getChildren().addAll(borde, contenido);
     }
 
-    public Text getJugador() {
-        return jugador;
+    public Text getContenido() {
+        return contenido;
     }
 
     public int getPosx() {

@@ -16,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -26,8 +24,9 @@ import javafx.stage.Stage;
  * @author Xavier
  */
 public class Main extends Application {
-    public TextField jugador= new TextField();
-    public String empieza;
+    public TextField jugador = new TextField();
+    public String quienEmpieza;
+    
     protected void mostrarAlerta(String mensaje){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
@@ -36,17 +35,17 @@ public class Main extends Application {
     }
 
     
-    public void jugar(String turno, String empieza){
+    public void jugarVSComputadora(String jugador, String quienEmpieza){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new TableroGUI(turno, empieza).getRoot(), 600,600);
+        Scene sc = new Scene(new VSComputadoraGUI(jugador, quienEmpieza).getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }
-    public void jugar2(String turno, String empieza){
+    public void jugarVSJugador(String jugador, String quienEmpieza){
         Stage s = new Stage();
         s.setTitle("PARTIDA");
-        Scene sc = new Scene(new TableroGUI2J(turno, empieza).getRoot(), 600,600);
+        Scene sc = new Scene(new VSJugadorGUI(jugador, quienEmpieza).getRoot(), 600,600);
         s.setScene(sc);
         s.show();
     }
@@ -58,31 +57,35 @@ public class Main extends Application {
         
         ComboBox signo = new ComboBox();
         ComboBox quienEmpieza = new ComboBox();
-        quienEmpieza.getItems().addAll("X","O");       
+                      
         signo.getItems().addAll("X","O");
+        quienEmpieza.getItems().addAll("X","O"); 
+        
         btn.setText("JUGAR VS P2");
         btn.setOnAction(i -> {
             if(signo.getValue()==null){
                 mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
             }else{                
-                empieza = (String) quienEmpieza.getValue();
-                jugar2((String)signo.getValue(), empieza);
+                this.quienEmpieza = (String) quienEmpieza.getValue();
+                jugarVSJugador((String)signo.getValue(), this.quienEmpieza);
             }
             
             
         });
+        
+        btn2.setText("JUGAR VS IA");
         btn2.setOnAction(i -> {
             if(signo.getValue()==null){
                 mostrarAlerta("NO SE ESCOGIO SIGNO PARA EL JUGADOR 1");
             }else{
-                empieza = (String) quienEmpieza.getValue();
-                jugar((String)signo.getValue(), empieza);
+                this.quienEmpieza = (String) quienEmpieza.getValue();
+                jugarVSComputadora((String)signo.getValue(), this.quienEmpieza);
                 
             }
             
         });
         
-        btn2.setText("JUGAR VS IA");
+        
         VBox root = new VBox();
         btn.setStyle("-fx-text-fill: white;\n" +
 "    -fx-font-family: \"Arial Narrow\";\n" +

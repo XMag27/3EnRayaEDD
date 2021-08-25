@@ -113,8 +113,7 @@ public class Tablero {
             for (int j=0; j<3; j++){
                 if(!casillas[i][j].equals("")){
                     contador++;
-                }
-                
+                }                
             }
         }
         if(contador == 9){
